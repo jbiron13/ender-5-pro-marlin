@@ -1,0 +1,1 @@
+My custom Marlin settings for the Ender 5 Pro. Use at your own risk. I barely know what I'm doing.

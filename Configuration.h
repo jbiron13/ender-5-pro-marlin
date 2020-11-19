@@ -291,7 +291,7 @@
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_BED 11
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
@@ -330,7 +330,7 @@
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 125
+#define BED_MAXTEMP 175
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -343,7 +343,7 @@
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within the PID
 #if ENABLED(PIDTEMP)
-  //#define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
+#define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
@@ -354,10 +354,16 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+  // Ender 5 Pro
+  // P25.40 I2.67 D60.34
+  #define DEFAULT_Kp 25.40
+  #define  DEFAULT_Ki 2.67
+  #define  DEFAULT_Kd 60.344
+
   // Ultimaker
-  #define  DEFAULT_Kp 23.81
-  #define  DEFAULT_Ki 1.93
-  #define  DEFAULT_Kd 73.64
+  // #define  DEFAULT_Kp 23.81
+  // #define  DEFAULT_Ki 1.93
+  // #define  DEFAULT_Kd 73.64
 
   // MakerGear
   //#define  DEFAULT_Kp 7.0
@@ -383,7 +389,7 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -394,14 +400,18 @@
 #define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
 
 #if ENABLED(PIDTEMPBED)
+// M304 P123.42 I20.09 D189.58
+  #define  DEFAULT_bedKp 123.42
+  #define  DEFAULT_bedKi 20.09
+  #define  DEFAULT_bedKd 189.58
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 110.38
-  #define  DEFAULT_bedKi 6.12
-  #define  DEFAULT_bedKd 497.33
+  // #define  DEFAULT_bedKp 110.38
+  // #define  DEFAULT_bedKi 6.12
+  // #define  DEFAULT_bedKd 497.33
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -529,7 +539,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.00, 80.00, 400.00, 93.00 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.00, 80.00, 800.00, 93.00 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -781,7 +791,7 @@
 
 // The size of the print bed
 #define X_BED_SIZE 230
-#define Y_BED_SIZE 225
+#define Y_BED_SIZE 220
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -789,7 +799,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 305
+#define Z_MAX_POS 300
 
 /**
  * Software Endstops
